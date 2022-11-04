@@ -1,1 +1,2 @@
-export const amapa = []
+export const amapa = ['Amapá', 'Calçoene', 'Cutias do Araguary', 'Ferreira Gomes', 'Itaubal', 'Laranjal do Jari', 'Macapá', 'Mazagão',
+    'Oiapoque', 'Pedra Branca do Amapari', 'Porto Grande', 'Pracuuba', 'Santana', 'Serra do Navio', 'Tartarugalzinho', 'Vitória do Jari']

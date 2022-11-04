@@ -1,1 +1,1 @@
-export const distritoFederal = []
+export const distritoFederal = ['Brasília']
