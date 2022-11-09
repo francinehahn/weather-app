@@ -50,18 +50,16 @@ export const Container = styled.section `
                 color: #fff;
             }
         }
-        img {
-            display: block;
-            margin: 20vh auto;
-        }
     }
     img {
-        @keyframes spin {
-            from {transform: rotate(0)}
-            to {transform: rotate(360deg)}
-        }
-        animation: spin 2.5s ease infinite;
         display: block;
-        margin: 20vh auto;
+        margin: 10vh auto 2vh auto;
+    }
+    h5 {
+        font-family: 'Montserrat', 'sans-serif';
+        font-size: 20px;
+        font-weight: 400;
+        text-align: center;
+        color: #fff;
     }
 `

@@ -50,46 +50,60 @@ export default function Home() {
 
       <h1>{`${selectedCity} - ${selectedState}`}</h1>
 
-      {isLoading && <Image src={'/img/loading-sun.png'} alt="Sol girando" width="60" height="60"/>}
+      {isLoading && <p>Carregando...</p>}
       {!isLoading && !data && error && <p>{error}</p>}
 
       {!isLoading && data && (
-        <section>
-          <div>
-            <h4>Temperatura:</h4>
-            <p>{data.main.temp}</p>
-          </div>
-    
-          <div>
-            <h4>Sensação térmica:</h4>
-            <p>{data.main.feels_like}</p>
-          </div>
+        <>
+          <section>
+            <div>
+              <h4>Temperatura:</h4>
+              <p>{data.main.temp}</p>
+            </div>
+      
+            <div>
+              <h4>Sensação térmica:</h4>
+              <p>{data.main.feels_like}</p>
+            </div>
 
-          <div>
-            <h4>Nascer do sol:</h4>
-            <p>{new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br")}</p>
-          </div>
-    
-          <div>
-            <h4>Por do sol:</h4>
-            <p>{new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br")}</p>
-          </div>
+            <div>
+              <h4>Nascer do sol:</h4>
+              <p>{new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br")}</p>
+            </div>
+      
+            <div>
+              <h4>Por do sol:</h4>
+              <p>{new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br")}</p>
+            </div>
 
-          <div>
-            <h4>Nuvens:</h4>
-            <p>{data.clouds.all}%</p>
-          </div>
+            <div>
+              <h4>Humidade:</h4>
+              <p>{data.main.humidity}%</p>
+            </div>
 
-          {data.clouds.all > 80 && <Image src="/img/cloudy.png" alt="Imagem de nuvens" width="100" height="100"/>}
-          {new Date().getHours() > 19 && new Date().getHours() < 6 && data.clouds.all < 80 && data.clouds.all > 30 && 
-            <Image src="/img/partially-cloudy-night.png" alt="Imagem de noite parcialmente nublada" width="100" height="100"/>}
-          {new Date().getHours() >= 6 && new Date().getHours() <= 18 && data.clouds.all < 80 && data.clouds.all > 30 && 
-            <Image src="/img/partially-cloudy-day.png" alt="Imagem de dia parcialmente nublado" width="100" height="100"/>}
-          {new Date().getHours() > 19 && new Date().getHours() < 6 && data.clouds.all <= 30 && 
-            <Image src="/img/moon.png" alt="Imagem de noite sem nuvens" width="100" height="100"/>}
-          {new Date().getHours() >= 6 && new Date().getHours() <= 18 && data.clouds.all <= 30 && 
-            <Image src="/img/sunny.png" alt="Imagem de dia sem nuvens" width="100" height="100"/>}
-        </section>
+            <div>
+              <h4>Nuvens:</h4>
+              <p>{data.clouds.all}%</p>
+            </div>
+          </section>
+
+          {data.clouds.all >= 70 && <Image src="/img/cloudy.png" alt="Imagem de nuvens" width="100" height="100"/>}
+            {new Date().getHours() > 19 && new Date().getHours() < 6 && data.clouds.all < 70 && data.clouds.all > 10 && 
+              <Image src="/img/partially-cloudy-night.png" alt="Imagem de noite parcialmente nublada" width="100" height="100"/>}
+            {new Date().getHours() >= 6 && new Date().getHours() <= 18 && data.clouds.all < 70 && data.clouds.all > 10 && 
+              <Image src="/img/partially-cloudy-day.png" alt="Imagem de dia parcialmente nublado" width="100" height="100"/>}
+            {new Date().getHours() > 19 && new Date().getHours() < 6 && data.clouds.all <= 10 && 
+              <Image src="/img/moon.png" alt="Imagem de noite sem nuvens" width="100" height="100"/>}
+            {new Date().getHours() >= 6 && new Date().getHours() <= 18 && data.clouds.all <= 10 && 
+              <Image src="/img/sunny.png" alt="Imagem de dia sem nuvens" width="100" height="100"/>}
+          
+
+          {data.weather[0].description === "broken clouds" && <h5>Predominantemente nublado</h5>}
+          {data.weather[0].description === "clear sky" && <h5>Céu limpo</h5>}
+          {data.weather[0].description === "scattered clouds" && <h5>Nuvens dispersas</h5>}
+          {data.weather[0].description === "few clouds" && <h5>Poucas nuvens</h5>}
+          {data.weather[0].description === "overcast clouds" && <h5>Nublado</h5>}
+        </>
       )}
     </Container>
     </>
