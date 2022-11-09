@@ -11,6 +11,7 @@ export const HeaderStyle = styled.header `
     a {
         color: white;
         font-size: 16px;
+        font-family: 'Montserrat', 'sans-serif';
         :hover {
             color: #efefef;
         }
