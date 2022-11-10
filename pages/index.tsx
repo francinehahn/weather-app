@@ -5,12 +5,14 @@ import { useRequestData } from "../hooks/useRequestData"
 import {cities} from "../data/cities"
 import { Container } from "../styles/index-style"
 import Image from "next/image"
+import { Loading } from "../components/Loading"
 
 
 export default function Home() {
   const [selectedState, setSelectedState] = useState<string>("São Paulo")
   const [selectedCity, setSelectedCity] = useState<string>("São Paulo")
-  const [data, error, isLoading] = useRequestData(`https://api.openweathermap.org/data/2.5/weather?q=${selectedCity.replaceAll(' ', '%20')},${'rs'},br&APPID=ce2f4caf0f55a737945e20f7404a89b4&units=metric`)
+  const [data, error, isLoading] = useRequestData(`https://api.openweathermap.org/data/2.5/weather?q=${selectedCity.replaceAll(' ', '%20')},${selectedState},br&APPID=ce2f4caf0f55a737945e20f7404a89b4&units=metric`)
+  const now = `${new Date().getHours()}:${new Date().getMinutes()}`
   
   useEffect(() => {
     const filterCity = cities.filter(item => item.state === selectedState.replaceAll(' ', '').replace('ã', 'a').replace('á', 'a').replace('í', 'i').replace('ô', 'o'))
@@ -48,22 +50,19 @@ export default function Home() {
         </select>
       </form>
 
-      <h1>{`${selectedCity} - ${selectedState}`}</h1>
+      <h2>{`${selectedCity} - ${selectedState}`}</h2>
 
-      {isLoading && <p>Carregando...</p>}
+      {isLoading && <Loading/>}
       {!isLoading && !data && error && <p>{error}</p>}
 
       {!isLoading && data && (
         <>
+          <h3>{data.main.temp}ºC</h3>
+          
           <section>
             <div>
-              <h4>Temperatura:</h4>
-              <p>{data.main.temp}</p>
-            </div>
-      
-            <div>
               <h4>Sensação térmica:</h4>
-              <p>{data.main.feels_like}</p>
+              <p>{data.main.feels_like}ºC</p>
             </div>
 
             <div>
@@ -82,27 +81,67 @@ export default function Home() {
             </div>
 
             <div>
+              <h4>Vento:</h4>
+              <p>{(data.wind.speed * 3.6).toFixed(0)} km/h</p>
+            </div>
+
+            <div>
               <h4>Nuvens:</h4>
               <p>{data.clouds.all}%</p>
             </div>
           </section>
 
-          {data.clouds.all >= 70 && <Image src="/img/cloudy.png" alt="Imagem de nuvens" width="100" height="100"/>}
-            {new Date().getHours() > 19 && new Date().getHours() < 6 && data.clouds.all < 70 && data.clouds.all > 10 && 
-              <Image src="/img/partially-cloudy-night.png" alt="Imagem de noite parcialmente nublada" width="100" height="100"/>}
-            {new Date().getHours() >= 6 && new Date().getHours() <= 18 && data.clouds.all < 70 && data.clouds.all > 10 && 
-              <Image src="/img/partially-cloudy-day.png" alt="Imagem de dia parcialmente nublado" width="100" height="100"/>}
-            {new Date().getHours() > 19 && new Date().getHours() < 6 && data.clouds.all <= 10 && 
-              <Image src="/img/moon.png" alt="Imagem de noite sem nuvens" width="100" height="100"/>}
-            {new Date().getHours() >= 6 && new Date().getHours() <= 18 && data.clouds.all <= 10 && 
-              <Image src="/img/sunny.png" alt="Imagem de dia sem nuvens" width="100" height="100"/>}
+          {/* Quando está chovendo independente do horário */}
+          {(data.weather[0].description === "light rain" || data.weather[0].description === "moderate rain") && 
+            <Image src="/img/rainning.png" alt="Imagem de chuva" width="130" height="130"/>}
+
+
+          {/* Quando está nublado mas não chovendo (independente do horário) */}
+          {data.clouds.all >= 70 && data.weather[0].description !== "light rain" && data.weather[0].description !== "moderate rain" &&
+          <Image src="/img/cloudy.png" alt="Imagem de nuvens" width="130" height="130"/>}
+
+
+          {/* Quando o horário atual é noite (após por-do-sol e antes do amanhecer), com nuvens e sem chuva */}
+          {((now > new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br") &&
+            now > new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br")) ||
+            (now < new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br") &&
+            now < new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br"))) &&
+            data.clouds.all < 70 && data.clouds.all > 10 && 
+            data.weather[0].description !== "light rain" && data.weather[0].description !== "moderate rain" &&
+            <Image src="/img/partially-cloudy-night.png" alt="Imagem de noite parcialmente nublada" width="130" height="130"/>}
           
+
+          {/* Quando o horário atual é de dia (após amanhecer e antes do por-do-sol), com nuvens e sem chuva */}
+          {(now >= new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br") &&
+            now <= new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br")) &&
+            data.clouds.all < 70 && data.clouds.all > 10 && 
+            data.weather[0].description !== "light rain" && data.weather[0].description !== "moderate rain" &&
+            <Image src="/img/partially-cloudy-day.png" alt="Imagem de dia parcialmente nublado" width="130" height="130"/>}
+          
+
+          {/* Quando o horário atual é noite (após por-do-sol e antes do amanhecer) e sem nuvens */}
+          {((now > new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br") &&
+            now > new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br")) ||
+            (now < new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br") &&
+            now < new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br"))) &&
+            data.clouds.all <= 10 && 
+            <Image src="/img/moon.png" alt="Imagem de noite sem nuvens" width="130" height="130"/>}
+          
+
+          {/* Quando o horário atual é de dia (após amanhecer e antes do por-do-sol) e sem nuvens */}
+          {(now >= new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br") &&
+            now <= new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br")) &&
+            data.clouds.all <= 10 && 
+            <Image src="/img/sunny.png" alt="Imagem de dia sem nuvens" width="130" height="130"/>}
+        
 
           {data.weather[0].description === "broken clouds" && <h5>Predominantemente nublado</h5>}
           {data.weather[0].description === "clear sky" && <h5>Céu limpo</h5>}
           {data.weather[0].description === "scattered clouds" && <h5>Nuvens dispersas</h5>}
           {data.weather[0].description === "few clouds" && <h5>Poucas nuvens</h5>}
           {data.weather[0].description === "overcast clouds" && <h5>Nublado</h5>}
+          {data.weather[0].description === "light rain" && <h5>Chuva fraca</h5>}
+          {data.weather[0].description === "moderate rain" && <h5>Chuva moderada</h5>}
         </>
       )}
     </Container>

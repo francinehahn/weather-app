@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const Container = styled.section `
     background-color: var(--lightblue);
-    height: 92vh;
+    height: 90vh;
     form {
         width: 100vw;
         height: 6vh;
@@ -26,12 +26,18 @@ export const Container = styled.section `
             }
         }
     }
-    h1 {
+    h2 {
         font-family: 'Montserrat', sans-serif;
         font-size: 28px;
         text-align: center;
-        padding-top: 5vh;
+        padding: 7vh 0 3vh 0;
         color: white;
+    }
+    h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 32px;
+        color: var(--yellow);
+        text-align: center;
     }
     section {
         display: flex;
@@ -53,7 +59,7 @@ export const Container = styled.section `
     }
     img {
         display: block;
-        margin: 10vh auto 2vh auto;
+        margin: 8vh auto 2vh auto;
     }
     h5 {
         font-family: 'Montserrat', 'sans-serif';

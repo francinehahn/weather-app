@@ -1,6 +1,6 @@
-import Link from "next/link"
 import { HeaderStyle } from "../styles/Header-style"
 import Head from "next/head"
+import Image from "next/image"
 
 export function Header() {
     return (
@@ -11,8 +11,14 @@ export function Header() {
             </style>
         </Head>
         <HeaderStyle>
-            <Link href="/">Página inicial</Link>
-            <Link href="/historyData">Histórico</Link>
+            <div>
+                <Image src="/img/logo.png" alt="Logo do site" width="86" height="55"/>
+                <h1>Weather App</h1>
+            </div>
+            <div>
+                <p>{new Date().getHours()}:{new Date().getMinutes()}</p>
+                <p>Horário de Brasília</p>
+            </div>
         </HeaderStyle>
         </>
     )

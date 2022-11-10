@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle `
 
     :root {
         --lightblue: #0095ff;
-        --yellow: #ffea02;
+        --yellow: #f0d400;
     }
 `
 
