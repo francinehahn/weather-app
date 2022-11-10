@@ -4,6 +4,7 @@ export const HeaderStyle = styled.header `
     height: 10vh;
     background-color: var(--lightblue);
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 2vw;

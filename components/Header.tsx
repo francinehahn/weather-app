@@ -15,10 +15,6 @@ export function Header() {
                 <Image src="/img/logo.png" alt="Logo do site" width="86" height="55"/>
                 <h1>Weather App</h1>
             </div>
-            <div>
-                <p>{new Date().getHours()}:{new Date().getMinutes()}</p>
-                <p>Horário de Brasília</p>
-            </div>
         </HeaderStyle>
         </>
     )

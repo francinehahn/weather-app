@@ -39,15 +39,19 @@ export default function Home() {
     
     <Container>
       <form>
-        <label htmlFor="state">Escolha o estado:</label>
-        <select name="state" value={selectedState} onChange={e => setSelectedState(e.target.value)}>
-          {renderStates}
-        </select>
+        <div>
+          <label htmlFor="state">Estado:</label>
+          <select name="state" value={selectedState} onChange={e => setSelectedState(e.target.value)}>
+            {renderStates}
+          </select>
+        </div>
 
-        <label htmlFor="city">Escolha a cidade:</label>
-        <select name="city" value={selectedCity} onChange={e => setSelectedCity(e.target.value)}>
-          {renderCities}
-        </select>
+        <div>
+          <label htmlFor="city">Cidade:</label>
+          <select name="city" value={selectedCity} onChange={e => setSelectedCity(e.target.value)}>
+            {renderCities}
+          </select>
+        </div>
       </form>
 
       <h2>{`${selectedCity} - ${selectedState}`}</h2>
@@ -61,7 +65,7 @@ export default function Home() {
           
           <section>
             <div>
-              <h4>Sensação térmica:</h4>
+              <h4>Sensação:</h4>
               <p>{data.main.feels_like}ºC</p>
             </div>
 
