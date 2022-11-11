@@ -2,6 +2,13 @@
 
 This project consumed data from the Open Weather Map API.
 
+## Technologies used
+* Next.js
+* Typescript
+* Styled-components
+* HTML
+* Axios
+
 ## Functionalities
 * User can select the state and the city to have information about the weather;
 * Information available: temperature, feels like, sunrise time, sunset time, wind speed, humidity and cloudiness;
@@ -27,7 +34,7 @@ This project consumed data from the Open Weather Map API.
 
 ## Images
 ### Desktop version
-![Desktop Image](./src/public/img/print-desktop.png)
+![Desktop Image](./public/img/print-desktop.png)
 
 ### Mobile version
-<img src="./src/public/img/print-mobile.jpeg" width="45%"/>
+<img src="./public/img/print-mobile.jpeg" width="45%"/>
