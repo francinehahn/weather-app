@@ -1,3 +1,5 @@
+![Cover](./public/img/Weather-App-cover.png)
+
 # Weather App
 
 This project consumed data from the Open Weather Map API.
@@ -16,7 +18,7 @@ This project consumed data from the Open Weather Map API.
 * This project is responsive to all screen sizes.
 
 ## Link to access the project
-[www.weather-map.com]()
+[www.weather-map.com](https://weather-app-vercel-chi.vercel.app/)
 
 ## Installing
 <pre>
