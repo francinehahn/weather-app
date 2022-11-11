@@ -52,7 +52,7 @@ export const Container = styled.section `
     h2 {
         font-family: 'Montserrat', sans-serif;
         text-align: center;
-        padding: 7vh 0 5vh 0;
+        padding: 7vh 1vw 5vh 1vw;
         color: white;
         @media screen and (min-width: 800px) {
             font-size: 28px;
