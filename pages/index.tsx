@@ -32,6 +32,9 @@ export default function Home() {
   return (
     <>
     <Head>
+      <title>Weather App</title>
+      <meta name="keywords" content="clima, tempo, temperatura"></meta>
+      <meta name="description" content="Saiba tudo sobre o clima em odo o território brasileiro"></meta>
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap')
       </style>
