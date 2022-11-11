@@ -141,18 +141,22 @@ export default function Home() {
             <Image src="/img/partially-cloudy-day.png" alt="Imagem de dia parcialmente nublado" width="130" height="130"/>}
           
 
-          {/* Quando o horário atual é noite (após por-do-sol e antes do amanhecer) e sem nuvens */}
+          {/* Quando o horário atual é noite (após por-do-sol e antes do amanhecer), sem nuvens e sem chuva */}
           {((now() > new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br") &&
             now() > new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br")) ||
             (now() < new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br") &&
             now() < new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br"))) &&
-            data.clouds.all <= 10 && <Image src="/img/moon.png" alt="Imagem de noite sem nuvens" width="130" height="130"/>}
+            data.weather[0].description !== "light rain" && data.weather[0].description !== "moderate rain" &&
+            data.weather[0].description !== "heavy intensity rain" && data.clouds.all <= 10 &&
+            <Image src="/img/moon.png" alt="Imagem de noite sem nuvens" width="130" height="130"/>}
           
 
-          {/* Quando o horário atual é de dia (após amanhecer e antes do por-do-sol) e sem nuvens */}
+          {/* Quando o horário atual é de dia (após amanhecer e antes do por-do-sol), sem nuvens e sem chuva */}
           {(now() >= new Date(data.sys.sunrise * 1000).toLocaleTimeString("pt-br") &&
             now() <= new Date(data.sys.sunset * 1000).toLocaleTimeString("pt-br")) &&
-            data.clouds.all <= 10 &&  <Image src="/img/sunny.png" alt="Imagem de dia sem nuvens" width="130" height="130"/>}
+            data.weather[0].description !== "light rain" && data.weather[0].description !== "moderate rain" &&
+            data.weather[0].description !== "heavy intensity rain" && data.clouds.all <= 10 && 
+            <Image src="/img/sunny.png" alt="Imagem de dia sem nuvens" width="130" height="130"/>}
         
 
           {data.weather[0].description === "broken clouds" && <h5>Predominantemente nublado</h5>}

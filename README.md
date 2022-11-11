@@ -18,7 +18,7 @@ This project consumed data from the Open Weather Map API.
 * This project is responsive to all screen sizes.
 
 ## Link to access the project
-[www.weather-map.com](https://weather-app-vercel-chi.vercel.app/)
+[www.weather-map.com](https://weather-app-olive-seven-60.vercel.app/)
 
 ## Installing
 <pre>

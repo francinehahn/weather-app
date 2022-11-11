@@ -77,7 +77,7 @@ export const Container = styled.section `
         flex-wrap: wrap;
         justify-content: center;
         gap: 4vw;
-        padding-top: 6vh;
+        padding: 6vh 2vw 0 2vw;
         div {
             display: flex;
             gap: .5vw;
