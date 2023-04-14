@@ -45,6 +45,7 @@ export default function Home() {
     <>
     <Head>
       <title>Weather App</title>
+      <link rel="icon" type="image/svg+xml" href="/logo.png" />
       <meta name="keywords" content="clima, tempo, temperatura"></meta>
       <meta name="description" content="Saiba tudo sobre o clima em odo o território brasileiro"></meta>
       <style>
