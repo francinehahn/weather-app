@@ -39,4 +39,4 @@ This project consumed data from the Open Weather Map API.
 ![Desktop Image](./public/img/print-desktop.png)
 
 ### Mobile version
-<img src="./public/img/print-mobile.jpeg" width="45%"/>
+<img src="./public/img/print-mobile.jpeg" width="35%"/>
